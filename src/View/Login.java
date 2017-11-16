@@ -17,7 +17,7 @@ public class Login extends JFrame{
 	
 	public Login() {
 		this.setTitle("Login");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);dispose();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.addComponentsToPane(this.getContentPane());
 		this.pack();
 		this.setResizable(false);
@@ -33,8 +33,8 @@ public class Login extends JFrame{
 		flowCenter.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JPanel flowSouth = new JPanel();
 		
-		userField = new JTextField(20);
-		passField = new JPasswordField(20);
+		userField = new JTextField(Utilities.FIELD_ROWS);
+		passField = new JPasswordField(Utilities.FIELD_ROWS);
 		
 		userLabel = new JLabel(Utilities.usernameLabel);
 		passLabel = new JLabel(Utilities.passwordLabel);
@@ -42,7 +42,7 @@ public class Login extends JFrame{
 		loginBtn = new JButton(Utilities.btnLoginText);
 		signUpBtn = new JButton(Utilities.btnSignUpText);
 		
-		Dimension dm = new Dimension(150,25);
+		Dimension dm = new Dimension(100,25);
 		signUpBtn.setPreferredSize(dm);
 		loginBtn.setPreferredSize(dm);
 		
