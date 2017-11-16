@@ -10,10 +10,10 @@ import javax.swing.*;
 import Model.Utilities;
 
 public class Login extends JFrame{
-	public JTextField userField;
-	public JPasswordField passField;
-	public JLabel userLabel, passLabel;
-	public JButton loginBtn, signUpBtn;
+	private JTextField userField;
+	private JPasswordField passField;
+	private JLabel userLabel, passLabel;
+	private JButton loginBtn, signUpBtn;
 	
 	public Login() {
 		this.setTitle("Login");
@@ -60,5 +60,32 @@ public class Login extends JFrame{
 		c.add(flowSouth, BorderLayout.SOUTH);
 		
 	}
+
+	public JTextField getUserField() {
+		return userField;
+	}
+
+	public JPasswordField getPassField() {
+		return passField;
+	}
+
+	public JButton getLoginBtn() {
+		return loginBtn;
+	}
+
+	public JButton getSignUpBtn() {
+		return signUpBtn;
+	}
+
+	public JLabel getUserLabel() {
+		return userLabel;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
