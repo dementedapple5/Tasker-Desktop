@@ -1,132 +1,134 @@
 package Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+public class Task {
 
+	private String id;
+	private String titulo;
+	private String fecha;
+	private String encargado;
+	private String coments;
+	private String prioridad;
+	private String contenido;
+	private String estado;
+	private String visible;
 
-public class Task implements Comparable<Task> {
-    private String title;
-    private String attendant;
-    private String comment;
-    private String description;
-    private int priority;
-    private String creationDate;
-    private boolean state;
-    private boolean visible;
+	/**
+	 * No args constructor for use in serialization
+	 *
+	 */
+	public Task() {
+	}
 
-    public Task(String title, String attendant, String comment, String description, int priority) {
-        this.title = title;
-        this.attendant = attendant;
-        this.comment = comment;
-        this.description = description;
-        this.priority = priority;
-        this.creationDate = setCreationDate();
-        this.state = false;
-        this.visible = true;
-    }
+	/**
+	 *
+	 * @param id
+	 * @param titulo
+	 * @param estado
+	 * @param visible
+	 * @param fecha
+	 * @param contenido
+	 * @param prioridad
+	 * @param coments
+	 * @param encargado
+	 */
+	public Task(String id, String titulo, String fecha, String encargado, String coments, String prioridad,
+			String contenido, String estado, String visible) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.fecha = fecha;
+		this.encargado = encargado;
+		this.coments = coments;
+		this.prioridad = prioridad;
+		this.contenido = contenido;
+		this.estado = estado;
+		this.visible = visible;
+	}
 
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Task(String title, String attendant, String comment, String description, int priority, String date, boolean state, boolean visible) {
-        this.title = title;
-        this.attendant = attendant;
-        this.comment = comment;
-        this.description = description;
-        this.priority = priority;
-        this.creationDate = date;
-        this.state = state;
-        this.visible = visible;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    private static String setCreationDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        return sdf.format(date);
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
+	public String getFecha() {
+		return fecha;
+	}
 
-    public boolean isVisible() {
-        return visible;
-    }
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getEncargado() {
+		return encargado;
+	}
 
-    public String getAttendant() {
-        return attendant;
-    }
+	public void setEncargado(String encargado) {
+		this.encargado = encargado;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	public String getComents() {
+		return coments;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setComents(String coments) {
+		this.coments = coments;
+	}
 
-    public int getPriority() {
-        return priority;
-    }
+	public String getPrioridad() {
+		return prioridad;
+	}
 
-    public String getCreationDate() {
-        return creationDate;
-    }
+	public void setPrioridad(String prioridad) {
+		this.prioridad = prioridad;
+	}
 
-    public boolean isState() {
-        return state;
-    }
+	public String getContenido() {
+		return contenido;
+	}
 
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
 
+	public String getEstado() {
+		return estado;
+	}
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "title='" + title + '\'' +
-                ", attendant='" + attendant + '\'' +
-                ", comment='" + comment + '\'' +
-                ", description='" + description + '\'' +
-                ", priority=" + priority +
-                ", creationDate='" + creationDate + '\'' +
-                ", state=" + state +
-                '}';
-    }
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public String getVisible() {
+		return visible;
+	}
 
-        Task task = (Task) o;
-
-        if (priority != task.priority) return false;
-        if (state != task.state) return false;
-        if (title != null ? !title.equals(task.title) : task.title != null) return false;
-        if (attendant != null ? !attendant.equals(task.attendant) : task.attendant != null)
-            return false;
-        if (comment != null ? !comment.equals(task.comment) : task.comment != null) return false;
-        if (description != null ? !description.equals(task.description) : task.description != null)
-            return false;
-        return creationDate != null ? creationDate.equals(task.creationDate) : task.creationDate == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (attendant != null ? attendant.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + priority;
-        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
-        result = 31 * result + (state ? 1 : 0);
-        return result;
-    }
-
-
-    @Override
-    public int compareTo(Task task) {
-        int comparePrior = this.getPriority() - (task.getPriority());
-        return comparePrior == 0 ? this.getTitle().compareTo(task.getTitle()) : comparePrior;
-    }
-    
+	public void setVisible(String visible) {
+		this.visible = visible;
+	}
+	
+	@Override
+	public String toString(){
+		
+		 return "Task{" +
+	                "title='" + titulo + '\'' +
+	                ", attendant='" + encargado + '\'' +
+	                ", comment='" + coments + '\'' +
+	                ", description='" + contenido + '\'' +
+	                ", priority=" + prioridad +
+	                ", creationDate='" + fecha + '\'' +
+	                ", state=" + estado +
+	                '}';
+		 } 
+	
 }

@@ -1,75 +1,125 @@
 package View;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import javax.swing.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
+import org.apache.http.client.ClientProtocolException;
 
-public class TaskView extends JFrame{
-	JMenuBar menuBar;
-	JMenu addTask, refresh;
-	
-	private int screenHeight,screenWidth;
+import Adapter.TaskRenderer;
+import Model.Conector;
+import Model.Task;
 
-	
+import java.awt.*;
+import java.io.IOException;
+
+public class TaskView extends JFrame {
+
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public TaskView()  {
-		
-		
-		setTitle("TASKS");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-		
-		Toolkit myScreen = Toolkit.getDefaultToolkit();
-		Dimension screenSize = myScreen.getScreenSize();
-		screenHeight = screenSize.height;
-		screenWidth = screenSize.width;
-		setSize(screenWidth/2,screenHeight/2);
-		System.out.println(screenWidth/2);
-		setLocation(screenWidth/4,screenHeight/4);
-		placeComponents(this.getContentPane());
-		
-	}
+        createGUI();
+    }
 
-	private void placeComponents(Container contentPane) {
-		
-		JPanel jsp1 = new JPanel();
-        JPanel jsp2 = new JPanel();
-        JLabel j1 = new JLabel("Area 1");
-        JLabel j2 = new JLabel("Area 2");
+    private void createGUI()  {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Toolkit myScreen = Toolkit.getDefaultToolkit();
+        Dimension screenSize = myScreen.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+
+        setPreferredSize(new Dimension(screenWidth / 2, screenHeight / 2));
+        setLocation(screenWidth / 4, screenHeight / 4);
         
-        menuBar = new JMenuBar();
-        addTask = new JMenu("Add Task");
-        refresh = new JMenu("Refresh");
-        menuBar.add(addTask);
-        menuBar.add(refresh);   
-        
-        jsp1.add(menuBar);
-         
-        jsp1.add(j1);
-        jsp2.add(j2);
-              
-         
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
-                true, jsp1, jsp2);
-        
-       splitPane.setUI(new BasicSplitPaneUI());
-            
-        splitPane.setOneTouchExpandable(false);
-        contentPane.add(splitPane);
+        add(createMenu(), BorderLayout.PAGE_START);
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, createPanelTodo(), createPanelDone());
+
+        splitPane.setResizeWeight(0.5);
+        add(splitPane, BorderLayout.CENTER);
         splitPane.setEnabled(false);
-        setVisible(true);
-        splitPane.setDividerLocation(300);
-	}
-	
-	
-	
-	
 
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        splitPane.setDividerLocation(0.5);
+    }
+    
+    private JPanel createMenu()  {
+    	
+    	JPanel panel = new JPanel(new BorderLayout());
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Change user");
+            
+        Conector conector = new Conector();
+        
+        try {
+			for(String userName : conector.obtenerUsuarios()) {
+				
+				JMenuItem menuItem1 = new JMenuItem(userName);
+				menu.add(menuItem1);
+				
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        menuBar.add(menu);
+        
+        menuBar.add(new JMenu("Refresh"));
+
+        panel.add(menuBar, BorderLayout.PAGE_START);
+    	
+    	
+		return panel;
+    	
+    }
+
+    private JPanel createPanelTodo() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(new JMenu("Add Task"));
+        menuBar.add(new JMenu("Refresh"));
+
+        panel.add(menuBar, BorderLayout.PAGE_START);
+
+//        Task task1 = new Task("Tarea 1", "pepin", "","Escribir 1", 1);
+//        Task task2 = new Task("Tarea 2", "pepin", "","Escribir 2", 2);
+//        Task task3 = new Task("Tarea 3", "pepin", "","Escribir 3", 3);
+
+
+        DefaultListModel<Task> listTasks = new DefaultListModel<>();
+//        listTasks.addElement(task1);
+//        listTasks.addElement(task2);
+//        listTasks.addElement(task3);
+        JList<Task> taskList = new JList<>(listTasks);
+        taskList.setCellRenderer(new TaskRenderer());
+
+        panel.add(new JScrollPane(taskList));
+
+        return panel;
+    }
+
+    private JPanel createPanelDone() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(new JMenu("Refresh"));
+
+        panel.add(menuBar, BorderLayout.PAGE_START);
+
+        return panel;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new TaskView());
+    }
 }
