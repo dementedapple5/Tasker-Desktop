@@ -7,16 +7,13 @@ import org.apache.http.client.ClientProtocolException;
 import Adapter.TaskRenderer;
 import Model.Conector;
 import Model.Task;
+import Model.User;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class TaskView extends JFrame {
 
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public TaskView()  {
@@ -58,9 +55,9 @@ public class TaskView extends JFrame {
         Conector conector = new Conector();
         
         try {
-			for(String userName : conector.obtenerUsuarios()) {
+			for(User userName : conector.obtenerUsuarios()) {
 				
-				JMenuItem menuItem1 = new JMenuItem(userName);
+				JMenuItem menuItem1 = new JMenuItem(userName.getUsername());
 				menu.add(menuItem1);
 				
 			}

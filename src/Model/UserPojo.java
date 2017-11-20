@@ -4,6 +4,7 @@ package Model;
 public class UserPojo {
 
 	private String username;
+	private String password;
 
 	/**
 	 * No args constructor for use in serialization
@@ -16,9 +17,20 @@ public class UserPojo {
 	 *
 	 * @param username
 	 */
-	public UserPojo(String username) {
+	public UserPojo(String username, String password) {
 		super();
 		this.username = username;
+		this.password = password;
+	}
+	
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getUsername() {

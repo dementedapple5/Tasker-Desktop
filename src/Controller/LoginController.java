@@ -1,10 +1,13 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
+import Model.Conector;
 import Model.User;
 import View.Login;
 import View.RegisterView;
@@ -21,9 +24,17 @@ public class LoginController implements ActionListener {
 	}
 	
 	public void checkUser(JTextField userField, JPasswordField passField) {
-		if (userField.getText().equals("dani")) {
-			log.getUserLabel().setText("Oki");
+		Conector conn = new Conector();
+		
+		if (conn.checkUser(userField.getText(), String.valueOf(passField.getPassword()))) {
+			System.out.println("BIENN");
+			new TaskController();
+			log.dispose();
+		}else {
+			JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta");
 		}
+		
+		
 	}
 
 	@Override

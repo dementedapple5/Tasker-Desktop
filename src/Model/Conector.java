@@ -36,9 +36,9 @@ public class Conector {
 
 
 	//Devuelve un ArrayList con todos los username registrados
-	public List<String> obtenerUsuarios() throws ClientProtocolException, IOException{
+	public ArrayList<User> obtenerUsuarios() throws ClientProtocolException, IOException{
 
-		List<String> listUserName = new ArrayList<>();
+		ArrayList<User> listUser = new ArrayList<>();
 
 		try {
 			HttpGet httpGet = new HttpGet("https://centraldemascotas.com/aplicaciones/tasker/select_users.php");
@@ -53,19 +53,48 @@ public class Conector {
 						.fromJson( json , collectionType);
 
 				for(UserPojo user: usuarios) {
-					listUserName.add(user.getUsername());
+					//System.out.println(user.getUsername());
+					listUser.add(new User(user.getUsername(),user.getPassword()));
+					//System.out.println(listUser.toString());
 				}
 
 				EntityUtils.consume(entity1);
 			} finally {
-				response1.close();
+				
 			}
 
 
 		} finally {
-			httpclient.close();
+			
 		}
-		return listUserName;
+		return listUser;
+	}
+	
+	public boolean checkUser(String username, String password) {
+		HttpPost httpPost = new HttpPost("https://centraldemascotas.com/aplicaciones/tasker/check_user.php");
+		boolean finded = false;
+		try {
+			List<NameValuePair> user = new ArrayList<NameValuePair>();
+			user.add(new BasicNameValuePair("username",username));
+			user.add(new BasicNameValuePair("pass",password));
+		    httpPost.setEntity(new UrlEncodedFormEntity(user));
+		    
+		    CloseableHttpResponse response1 = httpclient.execute(httpPost);
+			HttpEntity entity1 = response1.getEntity();
+			String json = IOUtils.toString(entity1.getContent(), "UTF8");
+			System.out.println(json);
+			if (json.equals("1")) {
+				finded=true;
+			}else {
+				finded = false;
+			}
+			
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return finded;
 	}
 
 	public static List<Task> obtenerTareas() throws ClientProtocolException, IOException{
@@ -85,8 +114,7 @@ public class Conector {
 	    
 	    Gson gson1 = new Gson(); // Or use new GsonBuilder().create();
 		Type collectionType = new TypeToken<Collection<TaskPojo>>(){}.getType();
-		List<TaskPojo> tareas = (List<TaskPojo>) new Gson()
-				.fromJson( json2 , collectionType);
+		List<TaskPojo> tareas = (List<TaskPojo>) new Gson().fromJson( json2 , collectionType);
 		
 		for(TaskPojo tarea: tareas) {
 			listTareas.add(tarea);

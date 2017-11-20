@@ -1,6 +1,4 @@
+*.iml
 /Model/
 /View/
-/adapter/
-/Adapter/
-/pruebas/
 /Controller/
