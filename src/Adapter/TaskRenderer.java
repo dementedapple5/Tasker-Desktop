@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import Model.Task;
@@ -30,6 +31,7 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 	private JPanel panelCheck;
 
 	public TaskRenderer() {
+
 		setLayout(new BorderLayout(5, 5));
 
 		panelText = new JPanel(new GridLayout(0, 1));
@@ -56,6 +58,8 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 	@Override
 	public Component getListCellRendererComponent(JList<? extends Task> list,
 			Task task, int index, boolean isSelected, boolean cellHasFocus) {
+		
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION );
 		
 		ImageIcon checkIcon = new ImageIcon("images/check_box.png"); // load the image to a imageIcon
 		Image image = checkIcon.getImage(); // transform it 

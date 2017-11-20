@@ -101,6 +101,7 @@ public class TaskView extends JFrame {
         listTasks.addElement(task2);
         listTasks.addElement(task3);
         JList<Task> taskList = new JList<>(listTasks);
+      
         taskList.setCellRenderer(new TaskRenderer());
 
         panel.add(new JScrollPane(taskList));
