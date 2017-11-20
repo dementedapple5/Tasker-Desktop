@@ -97,7 +97,7 @@ public class TaskView extends JFrame {
 
 
         DefaultListModel<Task> listTasks = new DefaultListModel<>();
-      listTasks.addElement(task1);
+        listTasks.addElement(task1);
         listTasks.addElement(task2);
         listTasks.addElement(task3);
         JList<Task> taskList = new JList<>(listTasks);

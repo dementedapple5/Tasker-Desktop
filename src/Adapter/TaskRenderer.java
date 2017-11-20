@@ -41,7 +41,7 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		panelEdit.add(lbEdit);
 		
 		panelCheck = new JPanel();
-		panelCheck.setBorder(new EmptyBorder(5,5,5,5));
+		panelCheck.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelCheck.add(lbCheck);
 		
 		JPanel p = new JPanel(new BorderLayout());
@@ -87,14 +87,22 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 			lbTitle.setBackground(list.getSelectionBackground());
 			lbDescription.setBackground(list.getSelectionBackground());
 			lbEdit.setBackground(list.getSelectionBackground());
-			setBackground(list.getSelectionBackground());
+			if(task.getPriority() == 1) {
+				setBackground(Color.RED);
+			}else if (task.getPriority() == 2) {
+				setBackground(Color.YELLOW);
+			}else {
+				setBackground(Color.GREEN);
+			}
 			panelEdit.setBackground(list.getSelectionBackground());
 		} else { // when don't select
-			lbTitle.setBackground(list.getBackground());
-			lbDescription.setBackground(list.getBackground());
-			lbEdit.setBackground(list.getBackground());
-			setBackground(list.getBackground());
-			panelEdit.setBackground(list.getBackground());
+			if(task.getPriority() == 1) {
+				setBackground(Color.RED);
+			}else if (task.getPriority() == 2) {
+				setBackground(Color.YELLOW);
+			}else {
+				setBackground(Color.GREEN);
+			}
 		}
 		return this;
 	}
