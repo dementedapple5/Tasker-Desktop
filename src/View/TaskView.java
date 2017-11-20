@@ -91,15 +91,15 @@ public class TaskView extends JFrame {
 
         panel.add(menuBar, BorderLayout.PAGE_START);
 
-//        Task task1 = new Task("Tarea 1", "pepin", "","Escribir 1", 1);
-//        Task task2 = new Task("Tarea 2", "pepin", "","Escribir 2", 2);
-//        Task task3 = new Task("Tarea 3", "pepin", "","Escribir 3", 3);
+        Task task1 = new Task("Título 1", "pepin", "","Escribir 1", 1);
+        Task task2 = new Task("Título 2", "pepin", "","Escribir 2", 2);
+        Task task3 = new Task("Título 3", "pepin", "","Escribir 3", 3);
 
 
         DefaultListModel<Task> listTasks = new DefaultListModel<>();
-//        listTasks.addElement(task1);
-//        listTasks.addElement(task2);
-//        listTasks.addElement(task3);
+      listTasks.addElement(task1);
+        listTasks.addElement(task2);
+        listTasks.addElement(task3);
         JList<Task> taskList = new JList<>(listTasks);
         taskList.setCellRenderer(new TaskRenderer());
 

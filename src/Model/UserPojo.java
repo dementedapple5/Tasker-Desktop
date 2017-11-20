@@ -1,7 +1,7 @@
 package Model;
 
 
-public class User {
+public class UserPojo {
 
 	private String username;
 
@@ -9,14 +9,14 @@ public class User {
 	 * No args constructor for use in serialization
 	 *
 	 */
-	public User() {
+	public UserPojo() {
 	}
 
 	/**
 	 *
 	 * @param username
 	 */
-	public User(String username) {
+	public UserPojo(String username) {
 		super();
 		this.username = username;
 	}
@@ -38,3 +38,7 @@ public class User {
 	} 
 
 }
+
+
+
+

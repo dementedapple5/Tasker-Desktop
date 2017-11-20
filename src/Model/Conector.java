@@ -44,11 +44,11 @@ public class Conector {
 				HttpEntity entity1 = response1.getEntity();
 				String json = IOUtils.toString(entity1.getContent(), "UTF8");        
 				Gson gson = new Gson(); // Or use new GsonBuilder().create();
-				Type collectionType = new TypeToken<Collection<User>>(){}.getType();
-				List<User> usuarios = (List<User>) new Gson()
+				Type collectionType = new TypeToken<Collection<UserPojo>>(){}.getType();
+				List<UserPojo> usuarios = (List<UserPojo>) new Gson()
 						.fromJson( json , collectionType);
 
-				for(User user: usuarios) {
+				for(UserPojo user: usuarios) {
 					listUserName.add(user.getUsername());
 				}
 
