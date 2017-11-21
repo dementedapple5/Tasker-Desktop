@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -70,6 +71,30 @@ public class Conector {
 		return listUser;
 	}
 	
+	public boolean registerUser(String name, String username, String password) {
+		HttpPost httpPost = new HttpPost("https://centraldemascotas.com/aplicaciones/tasker/create_user.php");
+		List<NameValuePair> user = new ArrayList<NameValuePair>();
+		user.add(new BasicNameValuePair("username",username));
+		user.add(new BasicNameValuePair("pass",password));
+		user.add(new BasicNameValuePair("name",name));
+		user.add(new BasicNameValuePair("token",""));
+		System.out.println(user);
+		try {
+			if (checkUser(username,password)) {
+				return false;
+			}else {
+				httpPost.setEntity(new UrlEncodedFormEntity(user));
+				CloseableHttpResponse response = httpclient.execute(httpPost);
+				StatusLine status = response.getStatusLine();
+				System.out.println(status);
+			}
+		} catch (IOException e) {
+			System.out.println("Fallo de Conexion");
+		}
+		
+		return true;
+	}
+	
 	public boolean checkUser(String username, String password) {
 		HttpPost httpPost = new HttpPost("https://centraldemascotas.com/aplicaciones/tasker/check_user.php");
 		boolean finded = false;
@@ -82,7 +107,6 @@ public class Conector {
 		    CloseableHttpResponse response1 = httpclient.execute(httpPost);
 			HttpEntity entity1 = response1.getEntity();
 			String json = IOUtils.toString(entity1.getContent(), "UTF8");
-			System.out.println(json);
 			if (json.equals("1")) {
 				finded=true;
 			}else {

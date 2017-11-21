@@ -90,6 +90,10 @@ public class RegisterView extends JFrame {
 	public JButton getBtnRegister() {
 		return btnRegister;
 	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
 	
 	
 	
