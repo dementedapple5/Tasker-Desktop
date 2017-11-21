@@ -28,11 +28,16 @@ public class RegisterController implements ActionListener {
 			String password = String.valueOf(rv.getPfPassword().getPassword());
 			String rPassword = String.valueOf(rv.getPfRPassword().getPassword());
 			if (rPassword.equals(password)) {
-				if (conn.registerUser(name, username, password)) {
-					System.out.println("Usuario registrado");
+				if (username.length()<3 || password.length()<3 || name.length()<3) {
+					JOptionPane.showMessageDialog(null,"Debes rellenar todos los campos con almenos 3 caracteres");
 				}else {
-					System.out.println("Usuario no registrado");
-				}	
+					if (conn.registerUser(name, username, password)) {
+						JOptionPane.showMessageDialog(null,"Usuario creado correctamente");
+					}else {
+						JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");
+					}	
+				}
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
 			}
