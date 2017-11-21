@@ -7,28 +7,18 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="src/" kind="src" path=""/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="lib/fluent-hc-4.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/httpclient-4.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/httpclient-cache-4.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/httpclient-win-4.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/httpcore-4.4.6.jar"/>
-	<classpathentry kind="lib" path="lib/httpmime-4.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/commons-io-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/fluent-hc-4.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/httpclient-4.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/httpclient-cache-4.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/httpclient-win-4.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/httpcore-4.4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/httpmime-4.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dani/eclipse-workspace/Tasker-Desktop/lib/json-simple-1.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/fluent-hc-4.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/httpclient-cache-4.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/httpclient-win-4.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/samuel/eclipse-workspace/Tasker-Desktop/lib/json-simple-1.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

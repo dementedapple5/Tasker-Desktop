@@ -1,5 +1,5 @@
 *.iml
-/Model/
-/View/
-/Controller/
 /Adapter/
+/Controller/
+/View/
+/Model/
