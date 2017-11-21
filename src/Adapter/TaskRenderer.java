@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 	private JPanel panelText;
 	private JPanel panelEdit;
 	private JPanel panelCheck;
+	private JCheckBox checkTask;
 
 	public TaskRenderer() {
 
@@ -74,8 +76,8 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		
 		
 		
-
-		lbCheck.setIcon(checkIcon);
+		checkTask = new JCheckBox();
+		lbCheck.add(checkTask);
 		lbEdit.setIcon(editIcon);
 		lbTitle.setText(task.getTitle());
 		lbDescription.setText(task.getDescription());
