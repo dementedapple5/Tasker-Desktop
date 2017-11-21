@@ -37,6 +37,8 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		setLayout(new BorderLayout(5, 5));
 
 		panelText = new JPanel(new GridLayout(0, 1));
+		lbTitle.setFont(lbTitle.getFont ().deriveFont (20.0f));
+		lbDescription.setFont(lbDescription.getFont ().deriveFont (0.0f));
 		panelText.add(lbTitle);
 		panelText.add(lbDescription);
 
@@ -46,7 +48,9 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		
 		panelCheck = new JPanel();
 		panelCheck.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelCheck.add(lbCheck);
+		checkTask =  new JCheckBox("Tarea completada");
+		checkTask.setSelected(false);
+		panelCheck.add(checkTask);
 		
 		JPanel p = new JPanel(new BorderLayout());
 		p.add(panelEdit,BorderLayout.WEST);
@@ -63,10 +67,10 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION );
 		
-		ImageIcon checkIcon = new ImageIcon("images/check_box.png"); // load the image to a imageIcon
-		Image image = checkIcon.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		checkIcon = new ImageIcon(newimg);  // transform it back
+//		ImageIcon checkIcon = new ImageIcon("images/check_box.png"); // load the image to a imageIcon
+//		Image image = checkIcon.getImage(); // transform it 
+//		Image newimg = image.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+//		checkIcon = new ImageIcon(newimg);  // transform it back
 		
 		ImageIcon editIcon = new ImageIcon("images/edit.png"); // load the image to a imageIcon
 		Image image2 = editIcon.getImage(); // transform it 
@@ -75,9 +79,6 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 		
 		
 		
-		
-		checkTask = new JCheckBox();
-		lbCheck.add(checkTask);
 		lbEdit.setIcon(editIcon);
 		lbTitle.setText(task.getTitle());
 		lbDescription.setText(task.getDescription());
