@@ -1,6 +1,8 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
 
 import org.apache.http.client.ClientProtocolException;
 
@@ -56,10 +58,8 @@ public class TaskView extends JFrame {
         
         try {
 			for(User userName : conector.obtenerUsuarios()) {
-				
 				JMenuItem menuItem1 = new JMenuItem(userName.getUsername());
 				menu.add(menuItem1);
-				
 			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -81,7 +81,7 @@ public class TaskView extends JFrame {
 
     private JPanel createPanelTodo() {
         JPanel panel = new JPanel(new BorderLayout());
-
+        
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(new JMenu("Add Task"));
         menuBar.add(new JMenu("Refresh"));
@@ -116,4 +116,5 @@ public class TaskView extends JFrame {
 
         return panel;
     }
+    
 }

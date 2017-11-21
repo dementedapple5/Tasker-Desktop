@@ -19,8 +19,11 @@ public class TaskController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setUsername(String username) {
+		taskView.setTitle("Tareas "+username);
 	}
 
 	

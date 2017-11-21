@@ -28,7 +28,8 @@ public class LoginController implements ActionListener {
 		
 		if (conn.checkUser(userField.getText(), String.valueOf(passField.getPassword()))) {
 			System.out.println("BIENN");
-			new TaskController();
+			TaskController tc = new TaskController();
+			tc.setUsername(userField.getText());
 			log.dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta");
