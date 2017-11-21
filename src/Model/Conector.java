@@ -121,15 +121,15 @@ public class Conector {
 		return finded;
 	}
 
-	public static List<Task> obtenerTareas() throws ClientProtocolException, IOException{
+	public List<Task> obtenerTareas(String encargado) throws ClientProtocolException, IOException{
 
 
-		List<TaskPojo> listTareas = new ArrayList<>();
+		List<Task> listTareas = new ArrayList<>();
 
 		HttpPost httpPost = new HttpPost("https://centraldemascotas.com/aplicaciones/tasker/select_tasks.php");
 		
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-	    params.add(new BasicNameValuePair("encargado", "pepin"));
+	    params.add(new BasicNameValuePair("encargado", encargado));
 	    httpPost.setEntity(new UrlEncodedFormEntity(params));
 	 
 	    CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -140,20 +140,31 @@ public class Conector {
 		Type collectionType = new TypeToken<Collection<TaskPojo>>(){}.getType();
 		List<TaskPojo> tareas = (List<TaskPojo>) new Gson().fromJson( json2 , collectionType);
 		
+		
 		for(TaskPojo tarea: tareas) {
-			listTareas.add(tarea);
+			listTareas.add(new Task(tarea.getTitulo(), tarea.getEncargado(), tarea.getComents(), tarea.getContenido(), Integer.parseInt(tarea.getPrioridad())));
 		}
+		System.out.println(listTareas.toString());
 	    
-	    System.out.println(json2);
 	    httpclient.close();
 
-		return null;
+		return listTareas;
 
 	}
 	
-	public static void main(String[] args) throws ClientProtocolException, IOException {
-       obtenerTareas();
-    }
+	/*public static void main(String[] args) {
+		Conector conn = new Conector();
+		try {
+			conn.obtenerTareas("pepin");
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
+	
 
 
 }

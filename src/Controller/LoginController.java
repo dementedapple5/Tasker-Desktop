@@ -35,7 +35,6 @@ public class LoginController implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta");
 		}
 		
-		
 	}
 
 	@Override

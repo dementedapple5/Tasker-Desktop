@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import org.apache.http.client.ClientProtocolException;
 
 import Adapter.TaskRenderer;
+import Controller.TaskController;
 import Model.Conector;
 import Model.Task;
 import Model.User;
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class TaskView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	public String currentUser;
 
 	public TaskView()  {
         createGUI();
@@ -88,19 +90,26 @@ public class TaskView extends JFrame {
 
         panel.add(menuBar, BorderLayout.PAGE_START);
 
-        Task task1 = new Task("Título 1", "pepin", "","Escribir 1", 1);
-        Task task2 = new Task("Título 2", "pepin", "","Escribir 2", 2);
-        Task task3 = new Task("Título 3", "pepin", "","Escribir 3", 3);
-
-
+        Conector conn = new Conector();
+        
         DefaultListModel<Task> listTasks = new DefaultListModel<>();
-        listTasks.addElement(task1);
-        listTasks.addElement(task2);
-        listTasks.addElement(task3);
-        JList<Task> taskList = new JList<>(listTasks);
-      
+        
+        
+        try {
+        	System.out.println(currentUser);
+			for(Task task: conn.obtenerTareas(currentUser)){
+				listTasks.addElement(task);
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+       
+        
+        JList<Task> taskList = new JList<Task>(listTasks);
         taskList.setCellRenderer(new TaskRenderer());
-
+        
         panel.add(new JScrollPane(taskList));
 
         return panel;
