@@ -4,10 +4,6 @@ package Model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Usuario on 26/10/2017.
- */
-
 public class Task implements Comparable<Task> {
     private String title;
     private String attendant;
@@ -78,10 +74,12 @@ public class Task implements Comparable<Task> {
     public boolean isState() {
         return state;
     }
+    
+    public void setState(boolean state) {
+		this.state = state;
+	}
 
-
-
-    @Override
+	@Override
     public String toString() {
         return "Task{" +
                 "title='" + title + '\'' +
@@ -91,7 +89,7 @@ public class Task implements Comparable<Task> {
                 ", priority=" + priority +
                 ", creationDate='" + creationDate + '\'' +
                 ", state=" + state +
-                '}';
+                "}\n";
     }
 
     @Override

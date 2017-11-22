@@ -4,57 +4,54 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import Model.Task;
 
-public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
+public class TaskRenderer extends JPanel implements ListCellRenderer<Task>, ActionListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JLabel lbEdit = new JLabel();
-	private JLabel lbCheck = new JLabel();
-	private JLabel lbTitle = new JLabel();
-	private JLabel lbDescription = new JLabel();
+	private JButton btnEdit, btnDone;
+	private JLabel lbDescription, lbTitle;
 	private JPanel panelText;
-	private JPanel panelEdit;
-	private JPanel panelCheck;
-	private JCheckBox checkTask;
+	private Task task;
 
 	public TaskRenderer() {
-
-		setLayout(new BorderLayout(5, 5));
+		
+		BorderLayout item = new BorderLayout(5,5);
+		setLayout(item);
+		
+		lbTitle = new JLabel();
+		setMarginLeft(5,lbTitle);
+		
+		lbDescription = new JLabel();
+		setMarginLeft(5,lbDescription);
 
 		panelText = new JPanel(new GridLayout(0, 1));
-		lbTitle.setFont(lbTitle.getFont ().deriveFont (20.0f));
-		lbDescription.setFont(lbDescription.getFont ().deriveFont (0.0f));
+		setMarginTop(10,panelText);
+		
 		panelText.add(lbTitle);
 		panelText.add(lbDescription);
 
-		panelEdit = new JPanel();
-		panelEdit.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelEdit.add(lbEdit);
+		btnEdit = new JButton("Edit");
+		btnEdit.setBackground(Color.decode("#FFFFFF"));
 		
-		panelCheck = new JPanel();
-		panelCheck.setBorder(new EmptyBorder(5, 5, 5, 5));
-		checkTask =  new JCheckBox("Tarea completada");
-		checkTask.setSelected(false);
-		panelCheck.add(checkTask);
+		btnDone = new JButton("Complete");
+		btnDone.setBackground(Color.decode("#FFFFFF"));
 		
 		JPanel p = new JPanel(new BorderLayout());
-		p.add(panelEdit,BorderLayout.WEST);
-		p.add(panelCheck,BorderLayout.CENTER);
+		
+		p.add(btnEdit,BorderLayout.WEST);
+		p.add(btnDone,BorderLayout.CENTER);
 	
 
 		add(p, BorderLayout.WEST);
@@ -63,54 +60,66 @@ public class TaskRenderer extends JPanel implements ListCellRenderer<Task> {
 
 	@Override
 	public Component getListCellRendererComponent(JList<? extends Task> list,
-			Task task, int index, boolean isSelected, boolean cellHasFocus) {
+		Task task, int index, boolean isSelected, boolean cellHasFocus) {
 		
-		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION );
-		
-//		ImageIcon checkIcon = new ImageIcon("images/check_box.png"); // load the image to a imageIcon
-//		Image image = checkIcon.getImage(); // transform it 
-//		Image newimg = image.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-//		checkIcon = new ImageIcon(newimg);  // transform it back
-		
-		ImageIcon editIcon = new ImageIcon("images/edit.png"); // load the image to a imageIcon
-		Image image2 = editIcon.getImage(); // transform it 
-		Image newimg2 = image2.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		editIcon = new ImageIcon(newimg2);  // transform it back
-		
-		
-		
-		lbEdit.setIcon(editIcon);
+		this.task = task;
+
 		lbTitle.setText(task.getTitle());
 		lbDescription.setText(task.getDescription());
-		lbDescription.setForeground(Color.blue);
 
 		// set Opaque to change background color of JLabel
 		lbTitle.setOpaque(true);
 		lbDescription.setOpaque(true);
-		lbEdit.setOpaque(true);
-
-		// when select item
-		if (isSelected) {
-			lbTitle.setBackground(list.getSelectionBackground());
-			lbDescription.setBackground(list.getSelectionBackground());
-			lbEdit.setBackground(list.getSelectionBackground());
-			if(task.getPriority() == 1) {
-				setBackground(Color.RED);
-			}else if (task.getPriority() == 2) {
-				setBackground(Color.YELLOW);
-			}else {
-				setBackground(Color.GREEN);
-			}
-			panelEdit.setBackground(list.getSelectionBackground());
-		} else { // when don't select
-			if(task.getPriority() == 1) {
-				setBackground(Color.RED);
-			}else if (task.getPriority() == 2) {
-				setBackground(Color.YELLOW);
-			}else {
-				setBackground(Color.GREEN);
-			}
+		
+		lbTitle.setBackground(Color.decode("#FFFFFF"));
+		lbDescription.setBackground(Color.decode("#FFFFFF"));
+		
+		if(task.getPriority() == 1) {
+			lbTitle.setForeground(Color.decode("#B71C1C"));
+		}else if (task.getPriority() == 2) {
+			lbTitle.setForeground(Color.decode("#1A237E"));
+		}else {
+			lbTitle.setForeground(Color.decode("#009688"));
 		}
+		
 		return this;
 	}
+	
+	
+	public static void setMarginLeft(int margin, JLabel label) {
+		Border border = label.getBorder();
+		Border margin1 = new EmptyBorder(0,margin,0,0);
+		label.setBorder(new CompoundBorder(border, margin1));
+	}
+	
+	public static void setMarginTop(int margin, JPanel panel) {
+		Border border = panel.getBorder();
+		Border margin1 = new EmptyBorder(margin,0,0,0);
+		panel.setBorder(new CompoundBorder(border, margin1));
+	}
+
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
+	public JButton getBtnDone() {
+		return btnDone;
+	}
+
+	public Task getTask() {
+		return task;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		/*if (e.getSource()==btnDone) {
+			System.out.println("Hello Cotto");
+		}*/
+		
+	}
+	
+	
+	
+	
+	
 }

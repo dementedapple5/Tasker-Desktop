@@ -142,11 +142,10 @@ public class Conector {
 		
 		
 		for(TaskPojo tarea: tareas) {
-			listTareas.add(new Task(tarea.getTitulo(), tarea.getEncargado(), tarea.getComents(), tarea.getContenido(), Integer.parseInt(tarea.getPrioridad())));
+			listTareas.add(new Task(tarea.getTitulo(), tarea.getEncargado(), tarea.getComents(), tarea.getContenido(), Integer.parseInt(tarea.getPrioridad()), tarea.getFecha(), tarea.getEstado(), tarea.getVisible()));
 		}
-		System.out.println(listTareas.toString());
 	    
-	    httpclient.close();
+	    response.close();
 
 		return listTareas;
 

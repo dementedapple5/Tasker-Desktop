@@ -19,19 +19,18 @@ import View.TaskView;
 
 public class TaskController implements ActionListener {
 	TaskView taskView;
-	HashSet<Task> tasks;
 	private String currentUser;
+	TaskRenderer tr;
 	
-	public TaskController() {
-		
-		this.taskView = new TaskView();
-		this.taskView.currentUser = currentUser;
-		System.out.println(currentUser);
+	public TaskController(String currentUser) {
+		this.currentUser = currentUser;
+		taskView = new TaskView(currentUser);
+		System.out.println("1:"+currentUser);
 		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		
 	}
 	

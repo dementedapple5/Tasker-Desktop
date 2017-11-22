@@ -12,25 +12,10 @@ public class TaskPojo {
 	private String estado;
 	private String visible;
 
-	/**
-	 * No args constructor for use in serialization
-	 *
-	 */
 	public TaskPojo() {
 	}
 
-	/**
-	 *
-	 * @param id
-	 * @param titulo
-	 * @param estado
-	 * @param visible
-	 * @param fecha
-	 * @param contenido
-	 * @param prioridad
-	 * @param coments
-	 * @param encargado
-	 */
+	
 	public TaskPojo(String id, String titulo, String fecha, String encargado, String coments, String prioridad,
 			String contenido, String estado, String visible) {
 		super();
@@ -101,16 +86,24 @@ public class TaskPojo {
 		this.contenido = contenido;
 	}
 
-	public String getEstado() {
-		return estado;
+	public boolean getEstado() {
+		if (estado.equals("1")) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
-	public String getVisible() {
-		return visible;
+	public boolean getVisible() {
+		if (visible.equals("1")) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public void setVisible(String visible) {

@@ -1,13 +1,10 @@
 package View;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.EmptyBorder;
 
 import org.apache.http.client.ClientProtocolException;
 
 import Adapter.TaskRenderer;
-import Controller.TaskController;
 import Model.Conector;
 import Model.Task;
 import Model.User;
@@ -18,9 +15,13 @@ import java.io.IOException;
 public class TaskView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public String currentUser;
+	private String currentUser;
+	private JMenu addTask,changeUser,refresh;
+	private Conector conn;
 
-	public TaskView()  {
+	public TaskView(String currentUser)  {
+		this.currentUser = currentUser;
+		conn = new Conector();
         createGUI();
     }
 
@@ -54,25 +55,25 @@ public class TaskView extends JFrame {
     	JPanel panel = new JPanel(new BorderLayout());
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Change user");
-            
-        Conector conector = new Conector();
         
+        addTask = new JMenu("Add Task");
+        refresh = new JMenu("refresh");
+        changeUser = new JMenu("Change User");
+            
+          
         try {
-			for(User userName : conector.obtenerUsuarios()) {
+			for(User userName : conn.obtenerUsuarios()) {
 				JMenuItem menuItem1 = new JMenuItem(userName.getUsername());
-				menu.add(menuItem1);
+				changeUser.add(menuItem1);
 			}
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
-        menuBar.add(menu);
-        
-        menuBar.add(new JMenu("Refresh"));
+        menuBar.add(changeUser);
+        menuBar.add(addTask);
+        menuBar.add(refresh);
 
         panel.add(menuBar, BorderLayout.PAGE_START);
     	
@@ -84,46 +85,42 @@ public class TaskView extends JFrame {
     private JPanel createPanelTodo() {
         JPanel panel = new JPanel(new BorderLayout());
         
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new JMenu("Add Task"));
-        menuBar.add(new JMenu("Refresh"));
-
-        panel.add(menuBar, BorderLayout.PAGE_START);
-
-        Conector conn = new Conector();
+        panel.add(new JScrollPane(addTasks(false,conn)));
         
-        DefaultListModel<Task> listTasks = new DefaultListModel<>();
-        
-        
-        try {
-        	System.out.println(currentUser);
-			for(Task task: conn.obtenerTareas(currentUser)){
-				listTasks.addElement(task);
-			}
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-       
-        
-        JList<Task> taskList = new JList<Task>(listTasks);
-        taskList.setCellRenderer(new TaskRenderer());
-        
-        panel.add(new JScrollPane(taskList));
-
         return panel;
     }
 
     private JPanel createPanelDone() {
         JPanel panel = new JPanel(new BorderLayout());
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new JMenu("Refresh"));
-
-        panel.add(menuBar, BorderLayout.PAGE_START);
+        
+        panel.add(new JScrollPane(addTasks(true,conn)));
 
         return panel;
     }
+    
+    
+    private JList<Task> addTasks(boolean isDone, Conector conn) {
+        DefaultListModel<Task> listTasks = new DefaultListModel<>();
+        
+        try {
+			for(Task task: conn.obtenerTareas(currentUser)){
+				if (task.isState()==isDone) {
+					listTasks.addElement(task);
+				}
+			}
+		} catch (ClientProtocolException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+        
+        JList<Task> taskList = new JList<Task>(listTasks);
+        
+        taskList.setCellRenderer(new TaskRenderer());
+        
+        return taskList;
+    }
+    
+    
     
 }
